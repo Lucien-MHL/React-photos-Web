@@ -1,0 +1,86 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
+.search-bar input {
+  outline: none;
+}
+
+.search-bar input::-webkit-input-placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.search-bar input:-ms-input-placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.search-bar input::-ms-input-placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.search-bar input::placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.pictures div article {
+  position: relative;
+}
+
+.pictures div article:hover::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.8)));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.pictures div article:hover a.photographer,
+.pictures div article:hover a.downloadBtn {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.pictures div article a.photographer {
+  cursor: pointer;
+  position: absolute;
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: white;
+  padding-left: 1rem;
+  padding-bottom: 0.75rem;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  opacity: 0;
+}
+
+.pictures div article a.downloadBtn {
+  cursor: pointer;
+  position: absolute;
+  text-decoration: none;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  opacity: 0;
+}
+
+.pictures div article a.downloadBtn::before {
+  font-family: "bootstrap-icons";
+  content: "\F30A";
+  color: white;
+  font-size: 1.2rem;
+  overflow: hidden;
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

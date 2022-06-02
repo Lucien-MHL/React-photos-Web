@@ -1,0 +1,10 @@
+.search-bar {
+  input {
+    outline: none;
+
+    &::placeholder {
+      opacity: 0.5;
+      font-style: italic;
+    }
+  }
+}
