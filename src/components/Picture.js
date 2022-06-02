@@ -1,20 +1,27 @@
 import React from "react";
 
 const Picture = ({ data }) => {
-  function chunks(arr, part) {
-    let result = [];
-    for (let i = part; i > 0; i--) {
-      result.push(arr.splice(0, Math.ceil(arr.length / i)));
-    }
-    return result;
-  }
-
   if (data) {
-    let copyArr = [...data];
-    let newArr = chunks(copyArr, 3);
-    let firstArr = newArr[0];
-    let secondArr = newArr[1];
-    let thirdArr = newArr[2];
+    let firstArr = [];
+    let secondArr = [];
+    let thirdArr = [];
+
+    let i = 0;
+    let j = 1;
+    let k = 2;
+
+    data.forEach((item, index) => {
+      if (index == i) {
+        firstArr.push(item);
+        i += 3;
+      } else if (index == j) {
+        secondArr.push(item);
+        j += 3;
+      } else if (index == k) {
+        thirdArr.push(item);
+        k += 3;
+      }
+    });
 
     return (
       <div className="row pt-5 pictures">
