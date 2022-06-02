@@ -1,3 +1,3 @@
-# React_photos_Web
+# React-photos-Web
 
 開發中
