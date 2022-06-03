@@ -7,12 +7,24 @@ const Nav = () => {
       <div className="container-fluid">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <NavLink activeclassname="active" to="/" className="nav-link">
+            <NavLink
+              className={({ isActive }) =>
+                "nav-link" + (isActive ? " active fw-bold" : "")
+              }
+              to="React-photos-Web/"
+              end
+            >
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeclassname="active" to="/about" className="nav-link">
+            <NavLink
+              className={({ isActive }) =>
+                "nav-link" + (isActive ? " active fw-bold" : "")
+              }
+              to="React-photos-Web/about"
+              end
+            >
               About
             </NavLink>
           </li>
