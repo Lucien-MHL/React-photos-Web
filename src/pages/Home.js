@@ -30,6 +30,7 @@ const Home = () => {
   useEffect(() => {
     if (currentSearch == "") {
       search(initialURL);
+      currentWidth();
     } else {
       search(searchURL);
     }
