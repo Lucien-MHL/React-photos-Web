@@ -23,6 +23,7 @@ const Home = () => {
 
     let parsedData = await dataFetch.json();
     setData(parsedData.photos);
+    setInput("");
   };
 
   //載入網頁時，先執行search函式
@@ -101,7 +102,15 @@ const Home = () => {
           setCurrentSearch(input);
         }}
         setInput={setInput}
+        input={input}
       />
+      {currentSearch !== "" ? (
+        <p className="fs-2 text-center mb-3">
+          與「{`${currentSearch}`}」相關的照片
+        </p>
+      ) : (
+        <></>
+      )}
       {checkWidth ? (
         <TwoColumnsPicture data={data} />
       ) : (

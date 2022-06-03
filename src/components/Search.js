@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = ({ search, setInput }) => {
+const Search = ({ search, setInput, input }) => {
   let inputHandler = (e) => {
     setInput(e.target.value);
   };
@@ -12,6 +12,7 @@ const Search = ({ search, setInput }) => {
         type="text"
         placeholder="搜尋相片... (請用英文搜尋)"
         onChange={inputHandler}
+        value={input}
       />
       <button className="rounded-end bg-white border-0 px-3" onClick={search}>
         <svg

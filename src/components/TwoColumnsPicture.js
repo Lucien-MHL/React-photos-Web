@@ -18,7 +18,7 @@ const TwoColumnsPicture = ({ data }) => {
     });
 
     return (
-      <div className="row pt-5 pictures">
+      <div className="row pictures">
         <div className="col-6 g-1 g-sm-3">
           {firstArr.map((item) => (
             <article

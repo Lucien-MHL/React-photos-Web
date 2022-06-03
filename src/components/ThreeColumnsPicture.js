@@ -24,7 +24,7 @@ const ThreeColumnsPicture = ({ data }) => {
     });
 
     return (
-      <div className="row pt-5 pictures">
+      <div className="row pictures">
         <div className="col-4 px-2">
           {firstArr.map((item) => (
             <article
