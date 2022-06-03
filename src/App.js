@@ -10,8 +10,8 @@ const App = () => {
     <div>
       <Nav />
       <Routes>
-        <Route path="React-photos-Web/" exact element={<Home />} />
-        <Route path="React-photos-Web/about" exact element={<About />} />
+        <Route path="React-photos-Web/" end element={<Home />} />
+        <Route path="React-photos-Web/about" end element={<About />} />
       </Routes>
     </div>
   );

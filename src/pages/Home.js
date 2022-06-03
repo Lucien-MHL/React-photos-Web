@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Search from "../components/Search";
-import Picture from "../components/Picture";
+import ThreeColumnsPicture from "../components/ThreeColumnsPicture";
+import TwoColumnsPicture from "../components/TwoColumnsPicture";
 
 const Home = () => {
   let [data, setData] = useState(null);
@@ -36,10 +37,10 @@ const Home = () => {
   // load more pictures when detect bottom
   const morePictures = async () => {
     let newURL;
-    if (input === "") {
+    if (currentSearch === "") {
       newURL = `https://api.pexels.com/v1/curated?page=${page}&per_page=15`;
     } else {
-      newURL = `https://api.pexels.com/v1/search?query=${input}&per_page=15&page=${page}`;
+      newURL = `https://api.pexels.com/v1/search?query=${currentSearch}&per_page=15&page=${page}`;
     }
     setPage(page + 1);
 
@@ -77,6 +78,22 @@ const Home = () => {
   }
   // infinite scroll end
 
+  // below is when window resize to render different component
+  const [checkWidth, setCheckWidth] = useState();
+
+  useEffect(() => {
+    window.addEventListener("resize", currentWidth);
+    return () => window.removeEventListener("resize", currentWidth);
+  }, []);
+
+  function currentWidth() {
+    if (window.innerWidth < 900) {
+      setCheckWidth(true);
+    } else {
+      setCheckWidth(false);
+    }
+  }
+
   return (
     <div className="container-lg">
       <Search
@@ -85,7 +102,11 @@ const Home = () => {
         }}
         setInput={setInput}
       />
-      <Picture data={data} />
+      {checkWidth ? (
+        <TwoColumnsPicture data={data} />
+      ) : (
+        <ThreeColumnsPicture data={data} />
+      )}
     </div>
   );
 };
