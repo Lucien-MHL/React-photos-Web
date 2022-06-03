@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Search from "../components/Search";
 import Picture from "../components/Picture";
-// 測試用
-import TwoCols from "../components/TwoCols";
-// 測試用
 
 const Home = () => {
   let [data, setData] = useState(null);
   let [input, setInput] = useState("");
   let [page, setPage] = useState(1);
+  let [currentSearch, setCurrentSearch] = useState("");
   const auth = "563492ad6f91700001000001babf8b50cdf54de59b175b239ac34ce1";
   const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
-  const searchURL = `https://api.pexels.com/v1/search?query=${input}&per_page=15&page=1`;
+  const searchURL = `https://api.pexels.com/v1/search?query=${currentSearch}&per_page=15&page=1`;
 
   const search = async (url) => {
     setPage(2);
@@ -28,8 +26,12 @@ const Home = () => {
 
   //載入網頁時，先執行search函式
   useEffect(() => {
-    search(initialURL);
-  }, []);
+    if (currentSearch == "") {
+      search(initialURL);
+    } else {
+      search(searchURL);
+    }
+  }, [currentSearch]);
 
   // load more pictures when detect bottom
   const morePictures = async () => {
@@ -79,7 +81,7 @@ const Home = () => {
     <div className="container-lg">
       <Search
         search={() => {
-          search(searchURL);
+          setCurrentSearch(input);
         }}
         setInput={setInput}
       />
