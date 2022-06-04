@@ -30,7 +30,6 @@ const Home = () => {
   useEffect(() => {
     if (currentSearch == "") {
       search(initialURL);
-      currentWidth();
     } else {
       search(searchURL);
     }
@@ -45,9 +44,6 @@ const Home = () => {
       newURL = `https://api.pexels.com/v1/search?query=${currentSearch}&per_page=15&page=${page}`;
     }
     setPage(page + 1);
-    console.log("offsetHeight: ", document.documentElement.offsetHeight);
-    console.log("innerHeight: ", window.innerHeight);
-    console.log("scrollTop: ", document.documentElement.scrollTop);
 
     let dataFetch = await fetch(newURL, {
       method: "GET",
@@ -79,7 +75,7 @@ const Home = () => {
 
   function handleScroll() {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
+      window.innerHeight + document.documentElement.scrollTop + 50 <
       document.documentElement.offsetHeight
     )
       return;
@@ -87,24 +83,26 @@ const Home = () => {
   }
   // infinite scroll end
 
-  // below is rendering different component when window resize
-  const [checkWidth, setCheckWidth] = useState();
+  // check viewing
+  const [viewport, setViewport] = useState(
+    window.matchMedia(`(max-width: 900px)`).matches
+  );
 
   useEffect(() => {
-    window.addEventListener("resize", currentWidth);
-    return () => window.removeEventListener("resize", currentWidth);
-  }, []);
+    window.addEventListener("resize", handleViewport);
+    return () => window.removeEventListener("resize", handleViewport);
+  });
 
-  function currentWidth() {
-    if (window.innerWidth < 900) {
-      setCheckWidth(true);
+  function handleViewport() {
+    if (window.matchMedia(`(max-width: 900px)`).matches) {
+      return setViewport(true);
     } else {
-      setCheckWidth(false);
+      return setViewport(false);
     }
   }
 
   return (
-    <div className="container-lg">
+    <div className="container-lg pb-3 mb-5">
       <Search
         search={() => {
           setCurrentSearch(input);
@@ -126,13 +124,13 @@ const Home = () => {
       ) : (
         <p className="fs-2 text-center mb-3">精選照片</p>
       )}
-      {checkWidth ? (
+      {viewport ? (
         <TwoColumnsPicture data={data} />
       ) : (
         <ThreeColumnsPicture data={data} />
       )}
       {isBottom && (
-        <div className="d-flex justify-content-center mb-5">
+        <div className="d-flex justify-content-center mt-3">
           <span className="spinner-border"></span>
           <span className="ps-3 lh-lg">Loading...</span>
         </div>
