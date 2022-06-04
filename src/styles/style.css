@@ -25,6 +25,7 @@
 
 .pictures div article {
   position: relative;
+  border-radius: 15px;
 }
 
 .pictures div article a.photographer {

@@ -26,11 +26,15 @@ const TwoColumnsPicture = ({ data }) => {
               className="w-100 mb-sm-4 mb-1 overflow-hidden"
             >
               <img src={item.src.large} className="w-100" />
-              <a href={item.photographer_url} className="photographer">
+              <a
+                href={item.photographer_url}
+                className="photographer"
+                target="_blank"
+              >
                 拍攝者: {item.photographer}
               </a>
               <a
-                href={item.src.original}
+                href={`https://www.pexels.com/photo/${item.id}/download/`}
                 className="downloadBtn"
                 target="_blank"
               ></a>
@@ -44,11 +48,15 @@ const TwoColumnsPicture = ({ data }) => {
               className="w-100 mb-sm-4 mb-1 overflow-hidden"
             >
               <img src={item.src.large} className="w-100" />
-              <a href={item.photographer_url} className="photographer">
+              <a
+                href={item.photographer_url}
+                className="photographer"
+                target="_blank"
+              >
                 拍攝者: {item.photographer}
               </a>
               <a
-                href={item.src.original}
+                href={`https://www.pexels.com/photo/${item.id}/download/`}
                 className="downloadBtn"
                 target="_blank"
               ></a>

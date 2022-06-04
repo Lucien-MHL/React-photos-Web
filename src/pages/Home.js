@@ -45,6 +45,9 @@ const Home = () => {
       newURL = `https://api.pexels.com/v1/search?query=${currentSearch}&per_page=15&page=${page}`;
     }
     setPage(page + 1);
+    console.log("offsetHeight: ", document.documentElement.offsetHeight);
+    console.log("innerHeight: ", window.innerHeight);
+    console.log("scrollTop: ", document.documentElement.scrollTop);
 
     let dataFetch = await fetch(newURL, {
       method: "GET",
@@ -68,19 +71,23 @@ const Home = () => {
 
   useEffect(() => {
     if (!isBottom) return;
-    morePictures();
+    if (data) {
+      if (page * 15 - 15 !== data.length) return setIsBottom(false);
+      morePictures();
+    }
   }, [isBottom]);
 
   function handleScroll() {
-    let viewPortH = window.innerHeight;
-    let topToScrollTop = document.documentElement.scrollTop;
-    let totalH = document.documentElement.offsetHeight;
-    if (viewPortH + topToScrollTop !== totalH) return;
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    )
+      return;
     setIsBottom(true);
   }
   // infinite scroll end
 
-  // below is when window resize to render different component
+  // below is rendering different component when window resize
   const [checkWidth, setCheckWidth] = useState();
 
   useEffect(() => {
@@ -106,16 +113,29 @@ const Home = () => {
         input={input}
       />
       {currentSearch !== "" ? (
-        <p className="fs-2 text-center mb-3">
-          與「{`${currentSearch}`}」相關的照片
-        </p>
+        data &&
+        (data.length !== 0 ? (
+          <p className="fs-2 text-center mb-3">
+            與「{`${currentSearch}`}」相關的照片
+          </p>
+        ) : (
+          <p className="fs-2 text-center mb-3">
+            找不到與「{`${currentSearch}`}」相關的照片
+          </p>
+        ))
       ) : (
-        <></>
+        <p className="fs-2 text-center mb-3">精選照片</p>
       )}
       {checkWidth ? (
         <TwoColumnsPicture data={data} />
       ) : (
         <ThreeColumnsPicture data={data} />
+      )}
+      {isBottom && (
+        <div className="d-flex justify-content-center mb-5">
+          <span className="spinner-border"></span>
+          <span className="ps-3 lh-lg">Loading...</span>
+        </div>
       )}
     </div>
   );
